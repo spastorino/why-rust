@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Why Rust? - Santiago Pastorino</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300,300italic,600,400italic,600italic,700italic,800italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono';
+      }
+      .remark-code {
+        font-size: 20px;
+        line-height: 150%;
+      }
+      .remark-slide-content {
+        font-size: 25px;
+        padding: 0em 2em 0em 2em;
+      }
+      .grey {
+        color: grey;
+      }
+      .grey a {
+        color: grey;
+      }
+      .small {
+        font-size: 60%;
+      }
+      .smaller {
+        font-size: 50%;
+      }
+      ul {
+        line-height: 150%;
+      }
+      li ul {
+        font-size: 90%;
+      }
+      h2 {
+        margin-bottom: -20px;
+      }
+      img {
+        margin-top: 1rem;
+        max-width: 100%;
+        max-height: 32rem;
+      }
+      .horizontal-space {
+        margin-left: 1em;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+      }
+      th {
+        text-align: center;
+        border-bottom: 1px solid black;
+        padding-top: .5em;
+        padding-bottom: .5em;
+      }
+      th:first-child {
+        text-align: left;
+      }
+      td {
+        text-align: center;
+      }
+      td:first-child {
+        text-align: left;
+      }
+      pre {
+        text-align: left;
+      }
+      td pre {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .remark-notes-current-area {
+        font-size: 1.5em;
+      }
+      .remark-slide-number {
+        font-size: 0.6em;
+      }
+      #slide-title .remark-slide-number {
+        display: none;
+      }
+      .small-slide {
+        font-size: 25px;
+      }
+      .small-slide p {
+        -webkit-margin-before: 0.5em;
+        -webkit-margin-after: 0.5em;
+      }
+      @page {
+        size: 908px 681px;
+        margin: 0;
+      }
+
+      @media print {
+        .remark-slide-scaler {
+          width: 100% !important;
+          height: 100% !important;
+          transform: scale(1) !important;
+          top: 0 !important;
+          left: 0 !important;
+        }
+      }
+
+      .rust-means {
+        display: block;
+        position: absolute;
+        text-align: left;
+        margin-left: 3rem;
+        margin-top: -15rem;
+        color: grey;
+        font-size: 2rem;
+      }
+
+      .rust-means::before {
+        background-image: url("content/images/rust-logo-blk.svg");
+        background-size: 4rem 4rem;
+        display: block;
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        content: "";
+        margin-left: -4rem;
+        margin-top: -.5rem;
+      }
+
+      .float-right {
+        float:right;
+      }
+
+      mark, .mark {
+        background-color: rgba(255,255,0,0.5);
+      }
+
+      .extra-spacing ul {
+        line-height: 180%;
+      }
+
+      .extra-spacing ul li ul{
+        line-height: 150%;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .no-hide .hidden {
+        display: inline;
+      }
+
+      .black-background {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+	sourceUrl: 'content/index.md',
+        countIncrementalSlides: false,
+        highlightSpans: true,
+        slideNumberFormat: '%current%',
+        highlightLines: true,
+      });
+    </script>
+  </body>
