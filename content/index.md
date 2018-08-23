@@ -28,10 +28,11 @@ Contact:
 # Agenda
 
 1. Systems Programming
-1. What is Rust?
-1. Why Rust?
-1. Use cases
-1. Ecosystem & Community
+1. Use Cases
+1. Abstraction without Overhead
+1. Memory Safety without Garbage Collection
+1. Concurrency without Data Races
+1. Great Tooling
 
 ---
 
@@ -40,26 +41,18 @@ Contact:
 Systems programming aims to produce software and software platforms which provide **services to other software**, are **performance constrained**, or both.
 (e.g. Operating Systems, Browsers, Game Engines, etc)
 
+The primary distinguishing characteristic of systems programming when compared to application programming is that application programming aims to produce software which **provides services to the user directly** (e.g. word processor)
+
+System programming requires a great degree of **hardware awareness**.
+
 ???
 
 service to other software
 performance constrained
 OS, Browser
 
---
-
-The primary distinguishing characteristic of systems programming when compared to application programming is that application programming aims to produce software which **provides services to the user directly** (e.g. word processor)
-
-???
-
 vs app programming
 provides services to users
-
---
-
-System programming requires a great degree of **hardware awareness**.
-
-???
 
 TODO: see more definitions
 
@@ -67,64 +60,12 @@ TODO: see more definitions
 
 # Programming Languages
 
-So many to choose from
-
-C, C++, Java, Go, C#, Clojure, JavaScript, Python, Ruby
-
-Most not suitable for systems development
-
----
-
-# Programming Languages
-
-So many to choose from
-
-C, C++, Java, Go, C#, Clojure, ~~JavaScript~~, ~~Python~~, ~~Ruby~~
-
-Most not suitable for systems development
-
-- Hard to predict or poor performance
-
----
-
-# Programming Languages
-
-So many to choose from
-
-C, C++, ~~Java~~, ~~Go~~, ~~C#~~, ~~Clojure~~, ~~JavaScript~~, ~~Python~~, ~~Ruby~~
-
-Most not suitable for systems development
-
-- Hard to predict or poor performance
-- Reliance on hard to manage runtime machinery e.g. "garbage collection"
-  or atomic ref-counting
-
----
-
-# Programming Languages
-
-So many to choose from
-
-C, C++, ~~Java~~, ~~Go~~, ~~C#~~, ~~Clojure~~, ~~JavaScript~~, ~~Python~~, ~~Ruby~~
-
-Most not suitable for systems development
-
-- Hard to predict or poor performance
-- Reliance on hard to manage runtime machinery e.g. "garbage collection"
-  or atomic ref-counting
-
-... but the languages remaining are unsafe ...
-- bugs might crash application, corrupt data, exposure to "pwnage"
-
---
-
-... and complicate utilization of available (multicore) parallelism.
-
----
-
-# Programming Languages
-
 <img src="content/images/rust-meetup-languages-decision-1.png" alt="Desicions 1">
+
+???
+
+- Manual memory management vs GC
+- Control vs Safety
 
 ---
 
@@ -140,24 +81,76 @@ Most not suitable for systems development
 
 - "New" systems programming language
   - 1.0 released in 2015
-
---
 - Multiparadigm 
   - Imperative, Structured, Functional, Concurrent, Generic, Compiled 
-
---
 - Static strong Typing
   - Inference
-
---
 - Emphasizing control, safety, and speed
-
---
 - Most loved programming language (2016, 2017 & 2018)
 
 ???
 
-The type safety of Haskell, the concurrency of Erlang, and the speed of C++
+- The type safety of Haskell, the concurrency of Erlang, and the speed of C++
+- Loved programming language
+
+---
+
+# Use Cases
+
+- Low level dev
+  - Operating Systems
+  - Browsers
+  - Servers
+  - etc, etc
+- Address hot spots of your app (Ruby, JavaScript, Python, etc)
+- WebAssembly
+- Microcontrollers, IoT
+
+???
+
+- WASM, book, WASM WG
+
+---
+
+class: center
+
+# Who is using Rust?
+
+<div>
+  <img src="content/images/firefox.svg" alt="Firefox logo" width="150rem" height="auto">
+  <img src="content/images/servo.png" alt="Firefox logo" width="150rem" height="auto">
+</div>
+<img src="content/images/rust-logo-blk.svg" alt="Rust logo" width="200rem" height="auto">
+
+???
+
+- Real use cases
+- Big companies
+
+---
+
+# Who is using Rust?
+
+- **Amazon** - Building tools in Rust.
+- **Atlassian** (makers of Jira) - Using Rust in the backend.
+- **Dropbox** - Using Rust in both the frontend and backend.
+- **Facebook** - Tools for source control.
+- **Google** - As part of the Fuchsia project.
+- **Microsoft** - Using Rust in part of their new Azure IoT work.
+- **npm** - Using Rust in some of the npm core services.
+- **Red Hat** - Creating a new storage system
+- **Reddit** - Using Rust in its comment processing
+- **Twitter** - As part of the build team support for Twitter.
+
+You can see even more on the Friends of Rust that include other familiar names like **Baidu**, **Disney**, **Wire**, **Mozilla**, **Samsung**, **Cloudflare**, **Chef**, **Canonical**, **Coursera**, **Tor** and more.
+
+---
+
+# Who is using Rust?
+
+**Redox OS**: Most complete Rust OS, microkernel design
+
+<img class="center" alt="Screenshot of Redox running a webbrowser and a file manager" src="content/images/redox-screenshot.png" style="margin-left: auto; margin-right: auto; width: auto; height: 25rem;">
 
 ---
 
@@ -165,33 +158,13 @@ The type safety of Haskell, the concurrency of Erlang, and the speed of C++
 
 # Why use Rust?
 
-- Abstraction without overhead
-- Memory safety without garbage collection
-- Concurrency without data races
-
---
-
-Provides the ability to **hack without fear**.
-
----
-
-# Why should I care?
-
-- Experienced C++ hacker?
-  - Make **and maintain** the designs you always wanted and prevent
-    nasty bugs
-- Prefer Ruby? JavaScript?
-  - Tune up your application and address hot-spots. Lower memory usage.
-    Add threads without fear.
-- Web assembly
-
----
-
-# Why use Rust?
-
 - **Abstraction without overhead**
 - Memory safety without garbage collection
 - Concurrency without data races
+
+???
+
+Provides the ability to **hack without fear**.
 
 ---
 
@@ -212,6 +185,8 @@ Provides the ability to **hack without fear**.
 - Cross-lang interop
 
 ???
+
+- **TODO**
 
 - Monomorphization is a compilation strategy to allow polymorphism with static dispatch
 - Monomorphization means generating specialized versions of generic functions
@@ -272,185 +247,9 @@ fn load_images(paths: &[PathBuf]) -> Vec<Image> {
 
 ---
 
-# Generics
-
-```rust
-enum Option<T> {
-  Some(T),
-  None,
-}
-```
-
-???
-
-There's no nulls also
-
-The interesting thing about this to me is Option is very much a core feature of Rust, and one of the first features you will probably learn about, and yet for it to even exist it requires both generics and sum types. It’s used ubiquitously throughout the Rust standard library wherever you might otherwise use null, a language feature criticized by its own creator Tony Hoare as a “billion dollar mistake”.
-
----
-
-# Generics
-
-```rust
-enum Option<T> {
-  Some(T),
-  None,
-}
-
-fn unwrap_or<T>(opt: Option<T>, default: T) -> T {
-  match opt {
-    Some(t) => t,
-    None => default,
-  }
-}
-```
-
----
-
-# Generics
-
-```rust
-enum Option<T> {
-  Some(T),
-  None,
-}
-
-impl<T> Option<T> {
-  fn unwrap_or(self, def: T) -> T {
-    match self {
-      Some(t) => t,
-      None => def,
-    }
-  }
-}
-```
-
----
-
-# Traits
-
-```rust
-trait Print {
-  fn print(&self);
-}
-
-impl Print for u64 {
-  fn print(&self) { println!(“{}”, self) }
-}
-
-impl Print for char {
-  fn print(&self) { println!(“‘{}’”, self) }
-}
-```
-
-???
-
-Traits are interfaces
-
----
-
-# Traits
-
-```rust
-fn main() {
-  let v1: u64 = 0;
-  v1.print();
-
-  let v2: char = 'h';
-  v2.print();
-}
-```
-
----
-
-# Traits for reuse: default methods
-
-```rust
-trait Read {
-  fn read(&mut self, buf: &mut [u8])
-          -> Result<usize>;
-
-  fn read_to_end(&mut self, buf: &mut Vec<u8>)
-                 -> Result<usize> {
-    // generic implementation
-  }
-
-  // additional default methods:
-  // read_to_string, read_exact, by_ref, bytes,
-  // chars, chain, take
-}
-```
-
----
-
-# Traits for reuse: default methods
-
-```rust
-impl Read for File {
-  fn read(&mut self, buf: &mut [u8])
-          -> Result<usize> { ... }
-}
-
-fn read_file(f: &File) -> String {
-   let mut contents = String::new();
-   f.read_to_string(&mut contents).unwrap();
-   contents
-}
-```
-
----
-
-# Traits for reuse: layering implementations
-
-```rust
-trait Clone {
-  fn clone(&self) -> Self;
-}
-
-impl<T: Clone, U: Clone> Clone for (T, U) {
-  fn clone(&self) -> (T, U) {
-    (t.clone(), u.clone())
-  }
-}
-
-impl<T: Clone> Clone for Vec<T> { ... }
-```
-
----
-
-# Traits for operator overloading
-
-```rust
-struct Item {
-  name: &’static str,
-  price: f32,
-}
-
-impl PartialEq for Item {
-  fn eq(&self, other: &Item) -> bool {
-    self.name == other.name &&
-      self.price == other.price
-  }
-}
-```
-
----
-
-# Derive Trait implementations
-
-```rust
-#[derive(PartialEq)]
-struct Item {
-  name: &’static str,
-  price: f32,
-}
-```
-
----
-
 # High-level code, low-level performance
 
-Let's compare and contrast a **Ruby on Rails** method implemented in pure
+Let see a **Ruby on Rails** method implemented in pure
 **Ruby** and as a native extension in **C** and in **Rust**.
 
 ---
@@ -598,7 +397,7 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 
 ---
 
-# Memory safety without garbage collection
+# Memory Safety without Garbage Collection
 
 - No segmentation fauls
 - No undefined behavior
@@ -610,20 +409,12 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 - No data races
 - Guaranteed by Rust's ownership system at compile time
 
----
-
-# In C
-
-- Array capacity is not checked on access
-    - Easy to get buffer overflows
-- Every `malloc` needs exactly one `free`
-    - Easy to get _use-after-free_ or _double-free_ bugs
-
-Vulnerabilities caused by memory unsafety are still common
-
 ???
 
-There are a lot of more issues.
+- Can't see examples of everything but we will see some
+- Every malloc needs one free -> use-after-free or double-free
+- Array capacity is not checked -> buffer overflows
+- Vulnerabilities caused by memory unsafety are still common
 
 ---
 
@@ -637,9 +428,7 @@ There are a lot of more issues.
 
 ???
 
-.grey[
 - CVE = Common Vulnerabilities and Exposures
-]
 
 ---
 
@@ -654,9 +443,7 @@ There are a lot of more issues.
 
 ???
 
-.grey[
 - CVE = Common Vulnerabilities and Exposures
-]
 
 ---
 
@@ -670,11 +457,11 @@ All this feels invisible and prevents _double free_ errors.
 
 ???
 
-Move semantics
-
-RAII (Resource Acquisition Is Initialization)
-
-Variables in Rust do more than just hold data in the stack, they can also own resources, e.g. Box<T> owns memory in the heap. Because Rust enforces the RAII discipline, whenever an object goes out of scope, its destructor is called and the resources owned by it are freed. This behavior shields against resource leak bugs.
+- Move semantics
+- RAII (Resource Acquisition Is Initialization)
+- Variables can own resources, e.g. Box<T> owns memory in the heap.
+  - Rust enforces the RAII discipline, whenever an object goes out of scope its destructor is called
+  - resources owned by it are freed -> no resource leak bugs
 
 ---
 
@@ -711,10 +498,6 @@ fn deliver(bag: Vec<Apple>) {
     // ...
 }
 ```
-
-???
-
-You can't use after move, if you need that
 
 ---
 
@@ -826,6 +609,13 @@ fn deliver(bag: Vec<Apple>) {
 }
 ```
 
+???
+
+- How do you reuse bag after calling deliver?
+- You can't use after move, if you need that ...
+  - Return bag again and give ownership back
+  - Or ... borrowing
+
 ---
 
 # Borrowing
@@ -838,7 +628,8 @@ fn main() {
     let mut bag = Vec::new();
     bag.push(apple);
     bag.push(Apple::new());
-    let weight = weigh(&bag); // Loan out the bag
+*   let weight = weigh(&bag); // Borrow the bag
+    println!("Bag {}, weights {}", bag, weight);
 }
 
 /// weigh function takes a shared
@@ -860,7 +651,8 @@ fn main() {
     let mut bag = Vec::new();
     bag.push(apple);
     bag.push(Apple::new());
-    deliver(&mut bag); // Loan out the bag for mutation
+*   deliver(&mut bag);        // Borrow the bag for mutation
+    println!("Bag is now {}", bag);
 }
 
 /// deliver function takes a mutable shared
@@ -875,7 +667,7 @@ fn deliver(bag: &mut Vec<Apple>) {
 # Dangers of mutation
 
 ```rust
-let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
 let slice = &buffer[1..];
 buffer.push_str(" World");
 println!("{:?}", slice);
@@ -886,7 +678,7 @@ println!("{:?}", slice);
 # Dangers of mutation
 
 ```rust
-*let mut buffer: String = format!("Hello");
+*let mut buffer = format!("Hello");
 let slice = &buffer[1..];
 buffer.push_str(" World");
 println!("{:?}", slice);
@@ -899,7 +691,7 @@ println!("{:?}", slice);
 # Dangers of mutation
 
 ```rust
-let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
 *let slice = &buffer[1..];
 buffer.push_str(" World");
 println!("{:?}", slice);
@@ -912,7 +704,7 @@ println!("{:?}", slice);
 # Dangers of mutation
 
 ```rust
-let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
 let slice = &buffer[1..];
 *buffer.push_str(" World");
 println!("{:?}", slice);
@@ -925,7 +717,7 @@ println!("{:?}", slice);
 # Dangers of mutation
 
 ```rust
-let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
 let slice = &buffer[1..];
 *buffer.push_str(" World");
 println!("{:?}", slice);
@@ -938,7 +730,7 @@ println!("{:?}", slice);
 # Dangers of mutation
 
 ```rust
-let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
 let slice = &buffer[1..];
 *buffer.push_str(" World");
 println!("{:?}", slice);
@@ -951,7 +743,7 @@ println!("{:?}", slice);
 # Dangers of mutation
 
 ```rust
-let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
 let slice = &buffer[1..];
 *buffer.push_str(" World");
 println!("{:?}", slice);
@@ -970,6 +762,11 @@ Creating a shared reference to X “read locks” X.
 - No writers.
 - Lock lasts until reference goes out of scope.
 
+???
+
+- Basically no read and write access at the same time
+- Rust rules
+
 --
 
 Creating a mutable reference to X “writes locks” X.
@@ -980,17 +777,127 @@ Never have a reader/writer at same time.
 
 ---
 
+# Lifetime of a borrow
+
+```rust
+let mut buffer = format!("Hello");
+let slice = &buffer[1..];
+buffer.push_str(" World");
+println!("{:?}", slice);
+```
+
+---
+
+# Lifetime of a borrow
+
+```rust
+let mut buffer = format!("Hello");
+*let slice = &buffer[1..];
+*buffer.push_str(" World");
+*println!("{:?}", slice);
+```
+
+**Rule**: No mutation during **lifetime of borrow**.
+
+**Lifetime**: span of code where reference is used.
+
+???
+
+- Same problem solved from lifetimes perspective
+
+---
+
 # Sharing "freezes" data (temporarily)
 
 ```rust
-let mut bag = Vec::new();
-bag.push(...);     // `bag` **mutable** here
-let r = &bag;      // `bag` **borrowed** here
-bag.len();         // reading `bag` ok while shared
-bag.push(...);     // cannot mutate while shared
-r.push(...);       // cannot mutate through a shared ref
-                   // `bag` borrow ends here
-bag.push(...);     // after last use of `r`, `bag` is mutable again
+let mut buffer = format!("Hello");
+let slice = &buffer;       // buffer borrowed here
+buffer.push_str(" World"); // cannot mutate while shared
+slice.push_str(" World");  // cannot mutate through a shared ref
+println!("{:?}", slice);   // reading slice ok while shared
+buffer.push_str(" World"); // after last use of slice, buffer is mutable again
+```
+
+---
+
+# Sharing "freezes" data (temporarily)
+
+```rust
+let mut buffer = format!("Hello");
+*let slice = &buffer;       // buffer borrowed here
+*buffer.push_str(" World"); // cannot mutate while shared
+*slice.push_str(" World");  // cannot mutate through a shared ref
+*println!("{:?}", slice);   // reading slice ok while shared
+buffer.push_str(" World"); // after last use of slice, buffer is mutable again
+```
+
+???
+
+- Lifetime of &buffer
+
+---
+
+# Sharing "freezes" data (temporarily)
+
+```rust
+let mut buffer = format!("Hello");
+*let slice = &buffer;       // buffer borrowed here
+buffer.push_str(" World"); // cannot mutate while shared
+slice.push_str(" World");  // cannot mutate through a shared ref
+println!("{:?}", slice);   // reading slice ok while shared
+buffer.push_str(" World"); // after last use of slice, buffer is mutable again
+```
+
+---
+
+# Sharing "freezes" data (temporarily)
+
+```rust
+let mut buffer = format!("Hello");
+let slice = &buffer;       // buffer borrowed here
+*buffer.push_str(" World"); // cannot mutate while shared
+slice.push_str(" World");  // cannot mutate through a shared ref
+println!("{:?}", slice);   // reading slice ok while shared
+buffer.push_str(" World"); // after last use of slice, buffer is mutable again
+```
+
+---
+
+# Sharing "freezes" data (temporarily)
+
+```rust
+let mut buffer = format!("Hello");
+let slice = &buffer;       // buffer borrowed here
+buffer.push_str(" World"); // cannot mutate while shared
+*slice.push_str(" World");  // cannot mutate through a shared ref
+println!("{:?}", slice);   // reading slice ok while shared
+buffer.push_str(" World"); // after last use of slice, buffer is mutable again
+```
+
+---
+
+# Sharing "freezes" data (temporarily)
+
+```rust
+let mut buffer = format!("Hello");
+let slice = &buffer;       // buffer borrowed here
+buffer.push_str(" World"); // cannot mutate while shared
+slice.push_str(" World");  // cannot mutate through a shared ref
+*println!("{:?}", slice);   // reading slice ok while shared
+buffer.push_str(" World"); // after last use of slice, buffer is mutable again
+```
+
+---
+
+# Sharing "freezes" data (temporarily)
+
+```rust
+let mut buffer = format!("Hello");
+let slice = &buffer;       // buffer borrowed here
+buffer.push_str(" World"); // cannot mutate while shared
+slice.push_str(" World");  // cannot mutate through a shared ref
+println!("{:?}", slice);   // reading slice ok while shared
+*buffer.push_str(" World"); // after last use of slice, buffer is mutable again
 ```
 
 ---
@@ -998,59 +905,94 @@ bag.push(...);     // after last use of `r`, `bag` is mutable again
 # Mutable references: no other access to data
 
 ```rust
-let mut bag = Vec::new();
-bag.push(...);     // `bag` **mutable** here
-let r = &mut bag;  // `bag` **mutably borrowed** here
-bag.len();         // cannot access `bag` while mutably borrowed
-r.push(...);       // but can mutate through `r`
-                   // `bag` borrow ends here
-bag.push(...);     // after last use of `r`, `bag` is accessible again
+let mut buffer = format!("Hello");
+buffer.push_str(" World");    // buffer mutable here
+let slice = &mut buffer;      // buffer mutably borrowed here
+println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+slice.push_str(" World");     // but can mutate through slice
+buffer.push_str(" World");    // after last use of slice, buffer is accessible
 ```
 
 ---
 
-# Ownership and Borrowing
-
-|Type    |Ownership          |Alias?|Mutate?|
-|--------|-------------------|------|-------|
-| T      | Owner             |      | y     |
-| &T     | Shared reference  | y    |       |
-| &mut T | Mutable reference |      | y     |
-
----
-
-# Borrowing and Lifetimes
+# Mutable references: no other access to data
 
 ```rust
-let mut buffer: String = format!("Hello");
-let slice = &buffer[1..];   // `'l` starts and borrow locks `buffer` for
-                            // lifetime `'l` of resulting reference
-buffer.push_str(" World");  // error can not borrow mutably while borrowed immutably
-println!(“{:?}”, slice);
+let mut buffer = format!("Hello");
+buffer.push_str(" World");    // buffer mutable here
+*let slice = &mut buffer;      // buffer mutably borrowed here
+*println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+*slice.push_str(" World");     // but can mutate through slice
+buffer.push_str(" World");    // after last use of slice, buffer is accessible
 ```
 
-**Rule**: No mutation during **lifetime of borrow**.
+???
 
-**Lifetime**: span of code where reference is used.
+- Lifetime of &mut buffer
 
 ---
 
-# Borrowing and Lifetimes
+# Mutable references: no other access to data
 
 ```rust
-fn main() {
-    let mut buffer: String = format!("Hello");
+let mut buffer = format!("Hello");
+*buffer.push_str(" World");    // buffer mutable here
+let slice = &mut buffer;      // buffer mutably borrowed here
+println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+slice.push_str(" World");     // but can mutate through slice
+buffer.push_str(" World");    // after last use of slice, buffer is accessible
+```
 
-    for i in 0 .. buffer.len() {
-        let slice = &buffer[i..];   // Borrow locks `buffer` until `slice`
-                                    // goes out of scope
-        buffer.push_str(" World");  // error: can not borrow mutably
-                                    // while borrowed immutably
-        println!(“{:?}”, slice);
-    }
+---
 
-    buffer.push_str(" World");      // ok: `buffer` is not borrowed here
-}
+# Mutable references: no other access to data
+
+```rust
+let mut buffer = format!("Hello");
+buffer.push_str(" World");    // buffer mutable here
+*let slice = &mut buffer;      // buffer mutably borrowed here
+println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+slice.push_str(" World");     // but can mutate through slice
+buffer.push_str(" World");    // after last use of slice, buffer is accessible
+```
+
+---
+
+# Mutable references: no other access to data
+
+```rust
+let mut buffer = format!("Hello");
+buffer.push_str(" World");    // buffer mutable here
+let slice = &mut buffer;      // buffer mutably borrowed here
+*println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+slice.push_str(" World");     // but can mutate through slice
+buffer.push_str(" World");    // after last use of slice, buffer is accessible
+```
+
+---
+
+# Mutable references: no other access to data
+
+```rust
+let mut buffer = format!("Hello");
+buffer.push_str(" World");    // buffer mutable here
+let slice = &mut buffer;      // buffer mutably borrowed here
+println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+*slice.push_str(" World");     // but can mutate through slice
+buffer.push_str(" World");    // after last use of slice, buffer is accessible
+```
+
+---
+
+# Mutable references: no other access to data
+
+```rust
+let mut buffer = format!("Hello");
+buffer.push_str(" World");    // buffer mutable here
+let slice = &mut buffer;      // buffer mutably borrowed here
+println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
+slice.push_str(" World");     // but can mutate through slice
+*buffer.push_str(" World");    // after last use of slice, buffer is accessible
 ```
 
 ---
@@ -1077,15 +1019,6 @@ However:
 - Abstraction without overhead
 - Memory safety without garbage collection
 - **Concurrency without data races**
-
----
-
-# Concurrency without data races
-
-- Multiparadigm concurrency
-  - msg passing via channels
-  - shared state (R/W- capabilities controlled via types)
-  - use native threads... or scoped threads ... or work-stealing ...
 
 ---
 
@@ -1192,29 +1125,14 @@ impl<T> Channel<T> {
 
 ---
 
-# Concurrency paradigms
-
-| Paradigm        | Ownership? | Borrowing? |
-|-----------------|------------|------------|
-| Message passing |     y      |            |
-| Fork join       |            |     y      |
-
-???
-
-Rust multiparadigm concurrency
-message passing
-mutable shared memory
-
----
-
 # Parallelism
 
 ```rust
 fn load_images(paths: &[PathBuf]) -> Vec<Image> {
     paths.iter() // For each path ...
          .map(|path| {
-	     Image::load(path) // ... load an image ...
-	 })
+             Image::load(path) // ... load an image ...
+         })
 	 .collect() // ... create and return a vector.
 }
 ```
@@ -1227,8 +1145,8 @@ extern crate rayon; // Third-party library
 fn load_images(paths: &[PathBuf]) -> Vec<Image> {
     paths.par_iter() // Make it parallel
          .map(|path| {
-	     Image::load(path)
-	 })
+             Image::load(path)
+         })
 	 .collect()
 }
 ```
@@ -1314,9 +1232,7 @@ d.push(5);
 
 ⇒ Rust ensures that Mutex is locked before accessing data
 
----
-
-# A Powerful Type System
+???
 
 Allows to:
 
@@ -1333,75 +1249,15 @@ Everything happens at compile time ⇒ _No run-time cost!_
 
 ---
 
-# Concurrency paradigms
-
-| Paradigm        | Ownership? | Borrowing? |
-|-----------------|------------|------------|
-| Message passing |     y      |            |
-| Fork join       |            |     y      |
-| Locking         |     y      |     y      |
-| Lock-free       |     y      |     y      |
-| Futures         |     y      |     y      |
-
----
-
-class: center
-
-# Who is using Rust?
-
-<div>
-  <img src="content/images/firefox.svg" alt="Firefox logo" width="150rem" height="auto">
-  <img src="content/images/servo.png" alt="Firefox logo" width="150rem" height="auto">
-</div>
-<img src="content/images/rust-logo-blk.svg" alt="Rust logo" width="200rem" height="auto">
-
-
----
-
-# Who is using Rust?
-
-- **Amazon** - Building tools in Rust.
-- **Atlassian** (makers of Jira) - Using Rust in the backend.
-- **Dropbox** - Using Rust in both the frontend and backend.
-- **Facebook** - Tools for source control.
-- **Google** - As part of the Fuchsia project.
-- **Microsoft** - Using Rust in part of their new Azure IoT work.
-- **npm** - Using Rust in some of the npm core services.
-- **Red Hat** - Creating a new storage system
-- **Reddit** - Using Rust in its comment processing
-- **Twitter** - As part of the build team support for Twitter.
-
-You can see even more on the Friends of Rust that include other familiar names like **Baidu**, **Wire**, **Mozilla**, **Samsung**, **Cloudflare**, **Chef**, **Canonical**, **Coursera**, **Tor** and more.
-
----
-
-# Who is using Rust?
-
-**Redox OS**: Most complete Rust OS, microkernel design
-
-<img class="center" alt="Screenshot of Redox running a webbrowser and a file manager" src="content/images/redox-screenshot.png" style="margin-left: auto; margin-right: auto; width: auto; height: 25rem;">
-
----
-
-# Easy Dependency Management
-
-.float-right[![Cargo logo](content/images/cargo-logo.png)]
-
-- Over 15000 crates on **crates.io**
-- Simply specify the desired version
-.grey[    - Add single line to `Cargo.toml`]
-- Cargo takes care of the rest
-.grey[    - Downloading, building, linking]
-
----
+<img src="content/images/cargo-logo.png" alt="Cargo logo" width="150rem" height="auto" style="position: absolute; right: 0rem; margin-top: -2rem;">
 
 # Great Tooling
 
 - **rustup**: Use multiple Rust versions for different directories
 - **cargo**: Automatically download, build, and link dependencies
 - **rustfmt**: Format Rust code according to style guidelines
---
 
+--
 - **Rust Playground**: Run and share code snippets in your browser
 
 ![Rust Playground screenshot](content/images/playground.png)
@@ -1432,96 +1288,4 @@ warning: `this if-then-else expression returns a bool literal`
 2 | if x == y { true } else { false }
   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: `you can reduce it to: x == y`
 ```
-
----
-
-# Great Tooling
-
-- **proptest**: A property testing framework
-
-```rust
-fn parse_date(s: &str) -> Option<(u32, u32, u32)> {
-    // […] check if valid YYYY-MM-DD format
-    let year = &s[0..4];
-    let month = &s[`6`..7]; // BUG: should be 5..7
-    let day = &s[8..10];
-    convert_to_u32(year, month, date)
-}
-proptest! {
-    #[test]
-    fn parse_date(`y in 0u32..10000`, `m in 1u32..13`, `d in 1u32..32`) {
-        let date_str = format!("{:04}-{:02}-{:02}", y, m, d);
-        let (y2, m2, d2) = parse_date(&date_str).unwrap();
-        prop_assert_eq!((y, m, d), (y2, m2, d2));
-    }
-}
-```
-
----
-
-<pre style="margin-left: 2rem;"><code style="line-height: 0.9; font-size: 20px;">
-- try random values                     y = 2497, m = 8, d = 27     passes
-    |                                   y = 9641, m = 8, d = 18     passes
-    | (failed test case found)          `y = 7360, m = 12, d = 20`    fails
-
-- reduce y to find simpler case         y = 3680, m = 12, d = 20    fails
-    |                                   y = 1840, m = 12, d = 20    fails
-    |                                   y = 920, m = 12, d = 20     fails
-    |                                   y = 460, m = 12, d = 20     fails
-    |                                   y = 230, m = 12, d = 20     fails
-    |                                   y = 115, m = 12, d = 20     fails
-    |                                   y = 57, m = 12, d = 20      fails
-    |                                   y = 28, m = 12, d = 20      fails
-    |                                   y = 14, m = 12, d = 20      fails
-    |                                   y = 7, m = 12, d = 20       fails
-    |                                   y = 3, m = 12, d = 20       fails
-    |                                   y = 1, m = 12, d = 20       fails
-    | (simplest y case still fails)     `y = 0, m = 12, d = 20`       fails
-
-- reduce m to find simpler case         y = 0, m = 6, d = 20        passes
-    |                                   y = 0, m = 9, d = 20        passes
-    |                                   y = 0, m = 11, d = 20       fails
-    | (minimum failure value found)     `y = 0, m = 10, d = 20`       fails
-
-- reduce d to find simpler case         y = 0, m = 10, d = 10       fails
-    |                                   y = 0, m = 10, d = 5        fails
-    |                                   y = 0, m = 10, d = 3        fails
-    |                                   y = 0, m = 10, d = 2        fails
-    | (reduced test case found)         `y = 0, m = 10, d = 1`        fails
-</code></pre>
-
-.grey[.small[See <https://github.com/altsysrq/proptest>]]
-
----
-
-# An Awesome Community
-
-- Code of Conduct from the beginning
-    - “We are committed to providing a **friendly, safe and welcoming environment** for all […]”
-    - “We will exclude you from interaction if you insult, demean or harass anyone”
-    - Followed on GitHub, IRC, the Rust subreddit, etc.
---
-- It works!
-    - No inappropriate comments in chats so far
-    - Focused technical discussions
-
---
-
-<div style="height: 1rem"></div>
-
-**_vs_**:
-
-> “So this patch is utter and absolute garbage, and should be shot in the
-head and buried very very deep.”
-
-<div class="right small grey" style="margin-top: -3rem;"><a href="https://lkml.org/lkml/2017/8/14/698">Linus Torvalds on 14 Aug 2017</a></div>
-
----
-
-# No Elitism
-
-- It doesn't matter where you come from
-    - C, C++, Java, Python, JavaScript, …
-- It's fine to ask questions
-    - People are happy to help
 
