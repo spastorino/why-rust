@@ -14,14 +14,18 @@ count: false
 
 - Computer Science at fing
 - WyeWorks co-founder
-- Ruby on Rails core member
-- Rust NLL & wasm
+- Ruby on Rails core alumni
+- Started with Rust in 2017
+- Member of Rust compiler NLL WG
+- Rust Latam conference organizer
+- Rust Montevideo Meetup organizer
 
 <div style="height: 2rem"></div>
 
 Contact:
 
-- spastorino@gmail.com
+- Twitter/Github: spastorino
+- Email: spastorino@gmail.com
 
 ---
 
