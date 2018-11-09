@@ -458,7 +458,7 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 - Values **moved** via assignment.
 - When final owner returns, **value is freed**.
 
-All this feels invisible and prevents _double free_ errors.
+All this feels invisible and prevents _double free_ errors and _memory leaks_.
 
 ???
 
