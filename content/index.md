@@ -405,11 +405,11 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 # Memory Safety without Garbage Collection
 
 - No segmentation faults
-- No undefined behavior
 - No double free
 - No dangling pointers
 - No iterator invalidation
 - No buffer overflows
+- No undefined behavior
 - No null pointers
 - No data races
 - Guaranteed by Rust's ownership system at compile time
