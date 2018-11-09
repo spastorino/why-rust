@@ -1146,6 +1146,30 @@ warning: `this if-then-else expression returns a bool literal`
 ```
 
 ---
+
+# To sum up
+
+- Rust is a high perfomant and safe systems programming language
+--
+
+- Used by a lot of big names already (Mozilla, Google, Microsoft, Facebook, Twitter, etc)
+--
+
+- You can use it to:
+--
+
+  - Fix hot stops of your high level app
+--
+
+  - To build WebAssembly apps
+--
+
+  - To build embedded or IoT stuff
+--
+
+  - In general, as a replacement of something you would do in C/C++
+
+---
 class: center
 name: title
 count: false
