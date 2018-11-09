@@ -403,7 +403,7 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 
 # Memory Safety without Garbage Collection
 
-- No segmentation fauls
+- No segmentation faults
 - No undefined behavior
 - No double free
 - No dangling pointers
@@ -622,6 +622,27 @@ fn deliver(bag: Vec<Apple>) {
 
 ---
 
+# What if I want to use bag again?
+
+```rust
+fn main() {
+    let apple = Apple::new();
+    let mut bag = Vec::new();
+    bag.push(apple);
+    bag.push(Apple::new());
+*   let (weight, bag) = weigh(bag); // Return the bag back
+    println!("Bag {}, weights {}", bag, weight);
+}
+
+/// weigh function takes an owned bag
+/// and return it's weight and the bag back
+fn weigh(bag: Vec<Apple>) -> (u32, Vec<Apple>) {
+    // ...
+}
+```
+
+---
+
 # Borrowing
 
 <img src="content/images/rust-meetup-children-borrowing-0r.png" alt="Borrowing" width="300rem" height="auto" style="position: absolute; right: 3rem; margin-top: 0rem">
@@ -755,40 +776,9 @@ println!("{:?}", slice);
 
 <img src="content/images/rust-meetup-mutation-6r.png" alt="Mutation 6">
 
----
-
-# Rust solution
-
-Compile-time read-write-lock:
-
-Creating a shared reference to X “read locks” X.
-- Other readers OK.
-- No writers.
-- Lock lasts until reference goes out of scope.
-
 ???
 
-- Basically no read and write access at the same time
-- Rust rules
-
---
-
-Creating a mutable reference to X “writes locks” X.
-- No other readers or writers.
-- Lock lasts until reference goes out of scope.
-
-Never have a reader/writer at same time.
-
----
-
-# Lifetime of a borrow
-
-```rust
-let mut buffer = format!("Hello");
-let slice = &buffer[1..];
-buffer.push_str(" World");
-println!("{:?}", slice);
-```
+No aliasing + mutation at the same time
 
 ---
 
@@ -801,13 +791,14 @@ let mut buffer = format!("Hello");
 *println!("{:?}", slice);
 ```
 
-**Rule**: No mutation during **lifetime of borrow**.
-
 **Lifetime**: span of code where reference is used.
 
-???
+--
 
-- Same problem solved from lifetimes perspective
+**Rules**:
+
+- If there's a shared reference, no writers during the **lifetime of the shared borrow**.
+- If there's a mutable reference, no other readers or writers during the **lifetime of the mutable borrow**
 
 ---
 
@@ -835,82 +826,13 @@ let mut buffer = format!("Hello");
 buffer.push_str(" World"); // after last use of slice, buffer is mutable again
 ```
 
-???
-
-- Lifetime of &buffer
-
----
-
-# Sharing "freezes" data (temporarily)
-
-```rust
-let mut buffer = format!("Hello");
-*let slice = &buffer;       // buffer borrowed here
-buffer.push_str(" World"); // cannot mutate while shared
-slice.push_str(" World");  // cannot mutate through a shared ref
-println!("{:?}", slice);   // reading slice ok while shared
-buffer.push_str(" World"); // after last use of slice, buffer is mutable again
-```
-
----
-
-# Sharing "freezes" data (temporarily)
-
-```rust
-let mut buffer = format!("Hello");
-let slice = &buffer;       // buffer borrowed here
-*buffer.push_str(" World"); // cannot mutate while shared
-slice.push_str(" World");  // cannot mutate through a shared ref
-println!("{:?}", slice);   // reading slice ok while shared
-buffer.push_str(" World"); // after last use of slice, buffer is mutable again
-```
-
----
-
-# Sharing "freezes" data (temporarily)
-
-```rust
-let mut buffer = format!("Hello");
-let slice = &buffer;       // buffer borrowed here
-buffer.push_str(" World"); // cannot mutate while shared
-*slice.push_str(" World");  // cannot mutate through a shared ref
-println!("{:?}", slice);   // reading slice ok while shared
-buffer.push_str(" World"); // after last use of slice, buffer is mutable again
-```
-
----
-
-# Sharing "freezes" data (temporarily)
-
-```rust
-let mut buffer = format!("Hello");
-let slice = &buffer;       // buffer borrowed here
-buffer.push_str(" World"); // cannot mutate while shared
-slice.push_str(" World");  // cannot mutate through a shared ref
-*println!("{:?}", slice);   // reading slice ok while shared
-buffer.push_str(" World"); // after last use of slice, buffer is mutable again
-```
-
----
-
-# Sharing "freezes" data (temporarily)
-
-```rust
-let mut buffer = format!("Hello");
-let slice = &buffer;       // buffer borrowed here
-buffer.push_str(" World"); // cannot mutate while shared
-slice.push_str(" World");  // cannot mutate through a shared ref
-println!("{:?}", slice);   // reading slice ok while shared
-*buffer.push_str(" World"); // after last use of slice, buffer is mutable again
-```
-
 ---
 
 # Mutable references: no other access to data
 
 ```rust
 let mut buffer = format!("Hello");
-buffer.push_str(" World");    // buffer mutable here
+buffer.push_str(" World");    // buffer mutated in place
 let slice = &mut buffer;      // buffer mutably borrowed here
 println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
 slice.push_str(" World");     // but can mutate through slice
@@ -923,80 +845,11 @@ buffer.push_str(" World");    // after last use of slice, buffer is accessible
 
 ```rust
 let mut buffer = format!("Hello");
-buffer.push_str(" World");    // buffer mutable here
+buffer.push_str(" World");    // buffer mutated in place
 *let slice = &mut buffer;      // buffer mutably borrowed here
 *println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
 *slice.push_str(" World");     // but can mutate through slice
 buffer.push_str(" World");    // after last use of slice, buffer is accessible
-```
-
-???
-
-- Lifetime of &mut buffer
-
----
-
-# Mutable references: no other access to data
-
-```rust
-let mut buffer = format!("Hello");
-*buffer.push_str(" World");    // buffer mutable here
-let slice = &mut buffer;      // buffer mutably borrowed here
-println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
-slice.push_str(" World");     // but can mutate through slice
-buffer.push_str(" World");    // after last use of slice, buffer is accessible
-```
-
----
-
-# Mutable references: no other access to data
-
-```rust
-let mut buffer = format!("Hello");
-buffer.push_str(" World");    // buffer mutable here
-*let slice = &mut buffer;      // buffer mutably borrowed here
-println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
-slice.push_str(" World");     // but can mutate through slice
-buffer.push_str(" World");    // after last use of slice, buffer is accessible
-```
-
----
-
-# Mutable references: no other access to data
-
-```rust
-let mut buffer = format!("Hello");
-buffer.push_str(" World");    // buffer mutable here
-let slice = &mut buffer;      // buffer mutably borrowed here
-*println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
-slice.push_str(" World");     // but can mutate through slice
-buffer.push_str(" World");    // after last use of slice, buffer is accessible
-```
-
----
-
-# Mutable references: no other access to data
-
-```rust
-let mut buffer = format!("Hello");
-buffer.push_str(" World");    // buffer mutable here
-let slice = &mut buffer;      // buffer mutably borrowed here
-println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
-*slice.push_str(" World");     // but can mutate through slice
-buffer.push_str(" World");    // after last use of slice, buffer is accessible
-```
-
----
-
-# Mutable references: no other access to data
-
-```rust
-let mut buffer = format!("Hello");
-buffer.push_str(" World");    // buffer mutable here
-let slice = &mut buffer;      // buffer mutably borrowed here
-println!("{:?}", buffer);     // cannot access buffer while mutably borrowed
-slice.push_str(" World");     // but can mutate through slice
-*buffer.push_str(" World");    // after last use of slice, buffer is accessible
 ```
 
 ---
@@ -1057,7 +910,6 @@ However:
 
 # Data Races
 
-
 <table style="border-bottom-style: none; border-top-style: none;">
     <tbody>
         <tr>
@@ -1116,7 +968,7 @@ fn foo(channel: &mut Channel) {
   let m = HashMap::new();
   m.insert("Hello", "World");
   channel.send(m);
-  m.insert("Hello", "Data Race"); // **Error**: use of moved value: `m`
+  m.insert("Hello", "Data Race"); // **Error**: use of moved value: \`m`
 }
 
 impl<T> Channel<T> {
@@ -1187,7 +1039,7 @@ fn load_images(paths: &[PathBuf]) -> Vec<Image> {
             // If current file name ends in "jpg" ...
              if path.ends_with(".jpg") {
                  // multiple mutable borrows occurr here
-                 jpgs += 1;
+*                jpgs += 1;
              }
              Image::load(path)
          })
@@ -1293,3 +1145,14 @@ warning: `this if-then-else expression returns a bool literal`
   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: `you can reduce it to: x == y`
 ```
 
+---
+class: center
+name: title
+count: false
+
+<img src="content/images/rust-logo-blk.svg" alt="Rust logo" width="250rem" height="auto">
+
+# Thanks
+
+.grey[Twitter/Github: spastorino]<br/>
+.grey[Email: spastorino@gmail.com]
