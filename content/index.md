@@ -90,6 +90,7 @@ TODO: see more definitions
 - Static strong Typing
   - Inference
 - Emphasizing control, safety, and speed
+- Free and open-source software, MIT License or Apache License 2.0
 - Most loved programming language (2016, 2017 & 2018)
 
 ???
