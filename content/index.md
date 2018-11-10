@@ -147,7 +147,7 @@ class: center
 - **Reddit** - Using Rust in its comment processing
 - **Twitter** - As part of the build team support for Twitter.
 
-You can see even more on the Friends of Rust that include other familiar names like **Baidu**, **Disney**, **Wire**, **Mozilla**, **Samsung**, **Cloudflare**, **Chef**, **Canonical**, **Coursera**, **Tor** and more.
+You can see even more on the Friends of Rust that include other familiar names like **Baidu**, **Disney**, **Wire**, **Mozilla**, **Samsung**, **Cloudflare**, **Gnome**, **Chef**, **Canonical**, **Coursera**, **Tor** and more.
 
 ---
 
