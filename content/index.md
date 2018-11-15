@@ -49,17 +49,6 @@ The primary distinguishing characteristic of systems programming when compared t
 
 System programming requires a great degree of **hardware awareness**.
 
-???
-
-service to other software
-performance constrained
-OS, Browser
-
-vs app programming
-provides services to users
-
-TODO: see more definitions
-
 ---
 
 # Programming languages
@@ -93,11 +82,6 @@ TODO: see more definitions
 - Free and open-source software, MIT License or Apache License 2.0
 - Most loved programming language (2016, 2017 & 2018)
 
-???
-
-- The type safety of Haskell, the concurrency of Erlang, and the speed of C++
-- Loved programming language
-
 ---
 
 # Use cases
@@ -109,11 +93,11 @@ TODO: see more definitions
   - etc, etc
 - Address hot spots of your app (Ruby, JavaScript, Python, etc)
 - WebAssembly
-- Microcontrollers, IoT
+- Embedded, Microcontrollers, IoT
 
 ???
 
-- WASM, book, WASM WG
+- WG Focus
 
 ---
 
@@ -126,11 +110,6 @@ class: center
   <img src="content/images/servo.png" alt="Firefox logo" width="150rem" height="auto">
 </div>
 <img src="content/images/rust-logo-blk.svg" alt="Rust logo" width="200rem" height="auto">
-
-???
-
-- Real use cases
-- Big companies
 
 ---
 
@@ -169,7 +148,7 @@ You can see even more on the Friends of Rust that include other familiar names l
 
 ???
 
-Provides the ability to **hack without fear**.
+- **Hack without fear**.
 
 ---
 
@@ -191,18 +170,8 @@ Provides the ability to **hack without fear**.
 
 ???
 
-- **TODO**
-
-- Monomorphization is a compilation strategy to allow polymorphism with static dispatch
-- Monomorphization means generating specialized versions of generic functions
-
-- boxed closures: current closures in Rust are "boxed" in that they consist of a function pointer, and a pointer to the closure environment (which contains captured variables). LLVM has trouble inlining and optimising around these indirections.
-- Unboxed closures work by having each closure expand to an anonymous type which is effectively a struct that contains the captured variables, and implements one of the three kinds of "call" operator.
-
-- Traits as interfaces
-- Traits for code reuse
-- Traits for operator overloading
-- Trait objects
+- Monomorphization generate specialized versions of generic functions
+- Unboxed closures: expand to an anonymous type which is effectively a struct that contains the captured variables
 
 ---
 
@@ -226,10 +195,9 @@ fn print_event(event: Event) {
 
 ???
 
-Algebraic data types
-Enum variants, Tuple Struct and Struct
-Pattern matching
-Macros
+- Algebraic data types / sum types
+- Pattern matching
+- Hygienic Macros
 
 ---
 
@@ -294,10 +262,6 @@ rb_str_blank_as(VALUE str)
       case 0xa:
       case 0xb:
 ```
-
-???
-
-95 lines of code
 
 ---
 
@@ -416,9 +380,8 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 
 ???
 
-- Can't see examples of everything but we will see some
-- Every malloc needs one free -> use-after-free or double-free
-- Array capacity is not checked -> buffer overflows
+- Every malloc needs one free
+- Array capacity is not checked
 - Vulnerabilities caused by memory unsafety are still common
 
 ---
@@ -462,11 +425,9 @@ All this feels invisible and prevents _double free_ errors and _memory leaks_.
 
 ???
 
-- Move semantics
-- RAII (Resource Acquisition Is Initialization)
-- Variables can own resources, e.g. Box<T> owns memory in the heap.
-  - Rust enforces the RAII discipline, whenever an object goes out of scope its destructor is called
-  - resources owned by it are freed -> no resource leak bugs
+- Move semantics / RAII
+- Rust enforces the RAII discipline
+- Variables can own resources
 
 ---
 
@@ -615,13 +576,6 @@ fn deliver(bag: Vec<Apple>) {
     // ...
 }
 ```
-
-???
-
-- How do you reuse bag after calling deliver?
-- You can't use after move, if you need that ...
-  - Return bag again and give ownership back
-  - Or ... borrowing
 
 ---
 
@@ -781,7 +735,7 @@ println!("{:?}", slice);
 
 ???
 
-No aliasing + mutation at the same time
+- No aliasing + mutation at the same time
 
 ---
 
@@ -1093,18 +1047,8 @@ d.push(5);
 
 ???
 
-Allows to:
-
-- Make misuse impossible
-.grey[- Impossible to access data behind a Mutex without locking]
+- Impossible to access data behind a Mutex without locking
 - Represent contracts in code instead of documentation
-.grey[
-- Page size of page and frame parameters must match in `map_to`
-]
-
-<div style="height:1rem"></div>
-
-Everything happens at compile time ⇒ _No run-time cost!_
 
 ---
 
