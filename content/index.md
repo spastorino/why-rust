@@ -10,9 +10,9 @@ count: false
 
 ---
 
-# About Me
+# About me
 
-- Computer Science at fing
+- Computer Science at Fing
 - WyeWorks co-founder
 - Ruby on Rails core alumni
 - Started with Rust in 2017
@@ -31,16 +31,16 @@ Contact:
 
 # Agenda
 
-1. Systems Programming
-1. Use Cases
-1. Abstraction without Overhead
-1. Memory Safety without Garbage Collection
-1. Concurrency without Data Races
-1. Great Tooling
+1. Systems programming
+1. Use cases
+1. Abstraction without overhead
+1. Memory safety without garbage collection
+1. Concurrency without data races
+1. Great tooling
 
 ---
 
-# Systems Programming
+# Systems programming
 
 Systems programming aims to produce software and software platforms which provide **services to other software**, are **performance constrained**, or both.
 (e.g. Operating Systems, Browsers, Game Engines, etc)
@@ -62,7 +62,7 @@ TODO: see more definitions
 
 ---
 
-# Programming Languages
+# Programming languages
 
 <img src="content/images/rust-meetup-languages-decision-1.png" alt="Desicions 1">
 
@@ -73,7 +73,7 @@ TODO: see more definitions
 
 ---
 
-# Programming Languages
+# Programming languages
 
 <img src="content/images/rust-meetup-languages-decision-2.png" alt="Desicions 2">
 
@@ -100,7 +100,7 @@ TODO: see more definitions
 
 ---
 
-# Use Cases
+# Use cases
 
 - Low level dev
   - Operating Systems
@@ -402,7 +402,7 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 
 ---
 
-# Memory Safety without Garbage Collection
+# Memory safety without garbage collection
 
 - No segmentation faults
 - No double free
@@ -423,7 +423,7 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 
 ---
 
-# Memory Safety
+# Memory safety
 
 <img alt="Buffer Overflow Vulnerabilities in Linux" src="content/images/Buffer Overflow Vulnerabilities in Linux.svg" style="margin-top: 0rem; margin-bottom: -2rem;">
 
@@ -437,7 +437,7 @@ extern “C” fn fast_blank(buf: Buf) -> bool {
 
 ---
 
-# Memory Safety
+# Memory safety
 
 <img alt="Linux CVEs in 2018" src="content/images/Linux CVEs in 2018.svg" style="margin-top: 0rem; margin-bottom: -2rem;">
 
@@ -669,7 +669,7 @@ fn weigh(bag: &Vec<Apple>) -> u32 {
 
 ---
 
-# Mutable Borrowing
+# Mutable borrowing
 
 <img src="content/images/rust-meetup-children-borrowing-0r.png" alt="Borrowing" width="300rem" height="auto" style="position: absolute; right: 3rem; margin-top: 0rem">
 
@@ -857,7 +857,7 @@ buffer.push_str(" World");    // after last use of slice, buffer is accessible
 
 ---
 
-# Memory Safety: A Strict Compiler
+# Memory safety: a strict compiler
 
 - It can take some time until your program compiles
 - Lifetimes can be complicated
@@ -882,7 +882,7 @@ However:
 
 ---
 
-# Data Races
+# Data races
 
 <table style="border-bottom-style: none; border-top-style: none;">
     <tbody>
@@ -911,7 +911,7 @@ However:
 
 ---
 
-# Data Races
+# Data races
 
 <table style="border-bottom-style: none; border-top-style: none;">
     <tbody>
@@ -1054,7 +1054,7 @@ Rust prevents a data race at compile time.
 
 ---
 
-# A Powerful Type System: Mutexes
+# A powerful type system: mutexes
 
 <table>
     <thead><tr><th width="50%" style="text-align: center">C++</th><th width="50%">Rust</th></tr></thead>
@@ -1110,7 +1110,7 @@ Everything happens at compile time ⇒ _No run-time cost!_
 
 <img src="content/images/cargo-logo.png" alt="Cargo logo" width="150rem" height="auto" style="position: absolute; right: 0rem; margin-top: -2rem;">
 
-# Great Tooling
+# Great tooling
 
 - **rustup**: Use multiple Rust versions for different directories
 - **cargo**: Automatically download, build, and link dependencies
@@ -1123,7 +1123,7 @@ Everything happens at compile time ⇒ _No run-time cost!_
 
 ---
 
-# Great Tooling
+# Great tooling
 
 - **clippy**: Additional warnings for dangerous or unidiomatic code
 
