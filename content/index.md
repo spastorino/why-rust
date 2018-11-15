@@ -488,6 +488,8 @@ fn eat(apple: Apple) {
 
 # Ownership
 
+<img src="content/images/rust-meetup-children-ownership-0r.jpg" alt="Ownership 0" width="300rem" height="auto" style="position: absolute; right: 3rem; margin-top: 0rem">
+
 ```rust
 fn main() {
     let apple = Apple::new();
