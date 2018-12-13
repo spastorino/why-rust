@@ -73,7 +73,7 @@ System programming requires a great degree of **hardware awareness**.
 # What is Rust?
 
 - "New" systems programming language
-  - 1.0 released in 2015
+  - Developed by Mozilla research, v1.0 released in 2015
 - Multiparadigm 
   - Imperative, Structured, Functional, Concurrent, Generic, Compiled 
 - Static strong Typing
