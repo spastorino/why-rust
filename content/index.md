@@ -439,13 +439,13 @@ All this feels invisible and prevents _double free_ errors and _memory leaks_.
 
 ```rust
 fn main() {
-    let apple = Apple::new();
-    eat(apple); // Give ownership of the apple.
-    eat(apple); // Error: `apple` has been moved.
+    let apple_1 = Apple::new();
+    eat(apple_1); // Give ownership of the apple_1.
+    eat(apple_1); // Error: apple_1 has been moved.
 }
 
 /// eat function takes ownership of the apple
-fn eat(apple: Apple) {
+fn eat(apple_2: Apple) {
 }
 ```
 
