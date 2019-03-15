@@ -591,13 +591,13 @@ fn main() {
     let mut bag = Vec::new();
     bag.push(apple);
     bag.push(Apple::new());
-*   let (weight, bag) = weigh(bag); // Return the bag back
+*   let (weight, bag) = weight(bag); // Return the bag back
     println!("Bag {}, weights {}", bag, weight);
 }
 
-/// weigh function takes an owned bag
-/// and return it's weight and the bag back
-fn weigh(bag: Vec<Apple>) -> (u32, Vec<Apple>) {
+/// weight function takes an owned bag
+/// and return its weight and the bag back
+fn weight(bag: Vec<Apple>) -> (u32, Vec<Apple>) {
     // ...
 }
 ```
@@ -614,13 +614,13 @@ fn main() {
     let mut bag = Vec::new();
     bag.push(apple);
     bag.push(Apple::new());
-*   let weight = weigh(&bag); // Borrow the bag
+*   let weight = weight(&bag); // Borrow the bag
     println!("Bag {}, weights {}", bag, weight);
 }
 
-/// weigh function takes a shared
+/// weight function takes a shared
 /// reference to the vector
-fn weigh(bag: &Vec<Apple>) -> u32 {
+fn weight(bag: &Vec<Apple>) -> u32 {
     // ...
 }
 ```
@@ -846,7 +846,7 @@ However:
     <tbody>
         <tr>
             <td width="22%">&nbsp;&nbsp;&nbsp;Sharing</td>
-	    <td>Actor-based lenguages</td>
+	    <td>Actor-based languages</td>
         </tr>
         <tr>
             <td>+ Mutation</td>
