@@ -93,7 +93,11 @@ System programming requires a great degree of **hardware awareness**.
   - etc, etc
 - Address hot spots of your app (Ruby, JavaScript, Python, etc)
 - WebAssembly
+- Web APIs
+- Networking, Blockchain
 - Embedded, Microcontrollers, IoT
+- Games
+- Cli
 
 ???
 
@@ -1102,19 +1106,34 @@ warning: `this if-then-else expression returns a bool literal`
 - Used by a lot of big names already (Mozilla, Google, Microsoft, Facebook, Twitter, etc)
 --
 
-- You can use it to:
+- You can use it for:
+--
+
+  - Systems programming in general
 --
 
   - Fix hot stops of your high level app
 --
 
-  - To build WebAssembly apps
+  - WebAssembly
 --
 
-  - To build embedded or IoT stuff
+  - Web APIs
 --
 
-  - In general, as a replacement of something you would do in C/C++
+  - Networking solutions and/or blockchain solutions
+--
+
+  - Embedded or IoT systems
+--
+
+  - Games
+--
+
+  - Cli
+--
+
+  - Etc
 
 ---
 class: center
