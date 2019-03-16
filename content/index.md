@@ -97,6 +97,7 @@ System programming requires a great degree of **hardware awareness**.
 - Networking, Blockchain
 - Embedded, Microcontrollers, IoT
 - Games
+- Machine learning
 - Cli
 
 ???
@@ -1128,6 +1129,9 @@ warning: `this if-then-else expression returns a bool literal`
 --
 
   - Games
+--
+
+  - Machine learning
 --
 
   - Cli
