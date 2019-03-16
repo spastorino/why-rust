@@ -1140,6 +1140,21 @@ warning: `this if-then-else expression returns a bool literal`
   - Etc
 
 ---
+
+class: center
+name: title
+count: false
+
+# Rust Latam
+
+<img src="content/images/rustlatam.png" alt="Rust Latam" width="600rem" height="auto">
+
+https://rustlatam.org
+
+@rustlatamconf
+
+---
+
 class: center
 name: title
 count: false
