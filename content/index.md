@@ -55,25 +55,25 @@ Lot of interest in Rust, some of our clients are already using it.
 
 # People love Rust (2016)
 
-<img src="content/images/most-loved-2016.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2016.png" alt="Stackoverflow Survey">
 
 ---
 
 # People love Rust (2017)
 
-<img src="content/images/most-loved-2017.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2017.png" alt="Stackoverflow Survey">
 
 ---
 
 # People love Rust (2018)
 
-<img src="content/images/most-loved-2018.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2018.png" alt="Stackoverflow Survey">
 
 ---
 
 # People love Rust (2019)
 
-<img src="content/images/most-loved-2019.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2019.png" alt="Stackoverflow Survey">
 
 ---
 
