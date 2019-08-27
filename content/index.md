@@ -129,6 +129,14 @@ Lot of interest in Rust, some of our clients are already using it.
 
 ---
 
+# Memory safety
+
+<img alt="Microsoft Memory Safety" src="content/images/microsoft-memory-safety-trends.png" style="margin-top: 0rem; margin-bottom: -2rem;">
+
+.grey[.smaller[Source: https://www.zdnet.com/article/microsoft-70-percent-of-all-security-bugs-are-memory-safety-issues/]]
+
+---
+
 # Parallel CSS Styling
 
 <img src="content/images/bug-631527.png" alt="Firefox 8 years bug fixed by Stylo">
