@@ -40,10 +40,6 @@ You can see even more familiar names like **Twitter**, **npm**, **Red Hat**, **R
 
 Being used also for **WebAssembly**, **Web APIs**, **Blockchain**, **Networking**, **Embedded**, **Games**. **Native Extensions**, etc.
 
-???
-
-https://www.jetbrains.com/lp/devecosystem-2019/rust/
-
 ---
 
 <img src="content/images/technology-radar.png" alt="Thoughtworks Radar">
