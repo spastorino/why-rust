@@ -30,12 +30,11 @@ count: false
 # Who is using Rust?
 
 - **Mozilla** - Stylo, WebRender.
-- **Google** - Fuschia operating system.
-- **Facebook** - Mercurial rewrite.
+- **Google** - Fuchsia operating system.
+- **Facebook** - Libra.
 - **Amazon** - Firecracker.
 - **Microsoft** - Azure IoT work.
 - **Dropbox** - Storage system.
-- **Redox OS** - Most complete Rust OS, microkernel design.
 
 You can see even more familiar names like **Twitter**, **npm**, **Red Hat**, **Reddit**, **Samsung**, **Cloudflare**, **Gnome**, **Chef**, **Canonical**, **Coursera**, **Tor** and many more.
 
