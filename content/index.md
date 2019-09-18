@@ -30,20 +30,15 @@ count: false
 # Who is using Rust?
 
 - **Mozilla** - Stylo, WebRender.
-- **Google** - Fuschia operating system.
-- **Facebook** - Mercurial rewrite.
+- **Google** - Fuchsia operating system.
+- **Facebook** - Libra.
 - **Amazon** - Firecracker.
 - **Microsoft** - Azure IoT work.
 - **Dropbox** - Storage system.
-- **Redox OS** - Most complete Rust OS, microkernel design.
 
 You can see even more familiar names like **Twitter**, **npm**, **Red Hat**, **Reddit**, **Samsung**, **Cloudflare**, **Gnome**, **Chef**, **Canonical**, **Coursera**, **Tor** and many more.
 
 Being used also for **WebAssembly**, **Web APIs**, **Blockchain**, **Networking**, **Embedded**, **Games**. **Native Extensions**, etc.
-
-???
-
-https://www.jetbrains.com/lp/devecosystem-2019/rust/
 
 ---
 
@@ -55,25 +50,25 @@ Lot of interest in Rust, some of our clients are already using it.
 
 # People love Rust (2016)
 
-<img src="content/images/most-loved-2016.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2016.png" alt="Stackoverflow Survey">
 
 ---
 
 # People love Rust (2017)
 
-<img src="content/images/most-loved-2017.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2017.png" alt="Stackoverflow Survey">
 
 ---
 
 # People love Rust (2018)
 
-<img src="content/images/most-loved-2018.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2018.png" alt="Stackoverflow Survey">
 
 ---
 
 # People love Rust (2019)
 
-<img src="content/images/most-loved-2019.png" alt="Thoughtworks Radar">
+<img src="content/images/most-loved-2019.png" alt="Stackoverflow Survey">
 
 ---
 
@@ -126,6 +121,14 @@ Lot of interest in Rust, some of our clients are already using it.
 <img src="content/images/Tux.svg" alt="Linux logo" width="120rem" height="auto" style="display:block; position: absolute; top: 1rem; right: 3rem;">
 
 .grey[.smaller[Source: https://www.cvedetails.com/vulnerability-list/vendor_id-33/product_id-47/year-2018/Linux-Linux-Kernel.html]]
+
+---
+
+# Memory safety
+
+<img alt="Microsoft Memory Safety" src="content/images/microsoft-memory-safety-trends.png" style="margin-top: 0rem; margin-bottom: -2rem;">
+
+.grey[.smaller[Source: https://www.zdnet.com/article/microsoft-70-percent-of-all-security-bugs-are-memory-safety-issues/]]
 
 ---
 
