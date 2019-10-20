@@ -38,7 +38,7 @@ count: false
 
 You can see even more familiar names like **Twitter**, **npm**, **Red Hat**, **Reddit**, **Samsung**, **Cloudflare**, **Gnome**, **Chef**, **Canonical**, **Coursera**, **Tor** and many more.
 
-Being used also for **WebAssembly**, **Web APIs**, **Blockchain**, **Networking**, **Embedded**, **Games**. **Native Extensions**, etc.
+Being used also for **WebAssembly**, **Blockchain**, **Networking**, **Embedded**, **Games**. **Native Extensions**, **Web APIs**, etc.
 
 ---
 
