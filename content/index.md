@@ -32,8 +32,8 @@ count: false
 - **Mozilla** - Servo, Stylo, WebRender.
 - **Google** - Fuchsia operating system, crosvm.
 - **Facebook** - Libra, Mononoke, Mercurial and HHVM.
-- **Amazon** - Firecracker.
 - **Microsoft** - Azure IoT, VSCode, other things.
+- **Amazon** - Firecracker.
 - **Dropbox** - Storage system.
 
 You can see even more familiar names like **Twitter**, **npm**, **Red Hat**, **Reddit**, **Samsung**, **Cloudflare**, **Gnome**, **Chef**, **Canonical**, **Coursera**, **Tor** and many more.
@@ -762,14 +762,14 @@ d.push(5);
 # To sum up
 
 - Rust is a high perfomant and safe systems programming language
-- **Used by a lot of big names already (Mozilla, Google, Facebook, Amazon, Microsoft, Twitter, Dropbox, etc)**
+- **Used by a lot of big names already (Mozilla, Google, Facebook, Microsoft, Amazon, Twitter, Dropbox, etc)**
 
 ---
 
 # To sum up
 
 - Rust is a high perfomant and safe systems programming language
-- Used by a lot of big names already (Mozilla, Google, Facebook, Amazon, Microsoft, Twitter, Dropbox, etc)
+- Used by a lot of big names already (Mozilla, Google, Facebook, Microsoft, Amazon, Twitter, Dropbox, etc)
 - **People love Rust**
   - **Performance**
   - **Memory safety without GC**
@@ -782,7 +782,7 @@ d.push(5);
 # To sum up
 
 - Rust is a high perfomant and safe systems programming language
-- Used by a lot of big names already (Mozilla, Google, Facebook, Amazon, Microsoft, Twitter, Dropbox, etc)
+- Used by a lot of big names already (Mozilla, Google, Facebook, Microsoft, Amazon, Twitter, Dropbox, etc)
 - People love Rust
   - Performance
   - Memory safety without GC
