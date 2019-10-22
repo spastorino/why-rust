@@ -585,6 +585,33 @@ Algebraic data types (enums), Pattern matching & Hygienic macros
 # No null pointers
 
 ```rust
+fn print_first(v: Vec<String>) {
+  let s = v.first();
+  println!("{}", s.to_uppercase());
+}
+```
+
+--
+
+
+```
+error[E0599]: no method named `to_uppercase` found for type `Option<&String>`
+              in the current scope
+ --> src/main.rs:3:20
+  |
+3 |   println!("{}", s.to_uppercase());
+  |                    ^^^^^^^^^^^^
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0599`.
+```
+
+---
+
+# No null pointers
+
+```rust
 enum Option<T> {
   Some(T),
   None,
